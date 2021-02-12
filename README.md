@@ -10,7 +10,7 @@ Snakoids: Combination of old snakes and asteroids game, where snake dodges aster
 -Enter the 'q' key to exit game whilst in play
 
 
-# The rules
+# The Rules
 
 -Avoid the ever changing obstacles at all cost!
 
