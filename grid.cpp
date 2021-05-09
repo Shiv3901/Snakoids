@@ -8,7 +8,7 @@
 #include <ctime>
 
 //defining the box size in which the game whill be played
-#define H 30
+#define H 30.0
 
 using namespace std;
 
@@ -40,7 +40,7 @@ typedef struct {
 //main function where the game runs
 int main()
 {
-	//intiating the ncurses terminal screen	
+	//intiating the ncurses terminal screen
 	initscr();
 
 	//assigning colour pairs and using them afterwards
@@ -50,7 +50,7 @@ int main()
 	init_pair(3, COLOR_GREEN, COLOR_BLACK);
 	init_pair(4, COLOR_BLACK, COLOR_CYAN);
 	init_pair(5, COLOR_WHITE, COLOR_BLACK);
-	
+
 	//starting off
 	keypad(stdscr, true);
 
@@ -89,7 +89,7 @@ int main()
   	object obs2 = {H,3*H/2-3};		//y will be displayed
   	object obs3 = {3*H-5, 3*H/2-3};	//g will be displayed
   	object obs4 = {2*H-2, H-3};		//d will be displayed
-  	
+
   	//stores the current coordinates of the obstacles
   	//will be used to check if that's a hit
   	int obs_corr_x[5] = {3*H/2};
@@ -114,7 +114,7 @@ int main()
   			trail_y[i] = trail_y[i-1];
   		}
 
-  		//initialising the condition to 0 
+  		//initialising the condition to 0
   		int condition = 0;
 
   		//while loop that runs unitl a valid arrow key is entered
@@ -136,7 +136,7 @@ int main()
 	  				condition = 1;
 	  				break;
 
-	  			//same as the left arrow key case 
+	  			//same as the left arrow key case
 	  			case KEY_RIGHT:
 	  				if((b.x + 1) <= 3*H){
 	  					b.x++;
@@ -145,16 +145,16 @@ int main()
 	  				break;
 
 	  			//if the key q is hit, then exit the game
-	  			case 'q': 
+	  			case 'q':
 	  				//terminate the ncurses window
-	  				endwin(); 
+	  				endwin();
 	  				//returning 0 to convey completion of the game
 	  				return 0;
 	  				break;
 	  		}
 
   		}
-  		
+
   		//if statement to check if the boundary of the wall is hit
   		//and it changes itself
   		if( (b.y - 1) == H/2){
@@ -167,18 +167,18 @@ int main()
   		if(direc_ver == true){
   			//increasing y by 1 micmicing going downwards
   			b.y++;
-  		} 
+  		}
   		//else it starts going upwards
   		else {
   			//decreasing y by 1 mimicing going upwards
   			b.y--;
   		}
 
- 		
+
   		//refreshing the screen at each iteration of the loop
   		refresh();
   		//erases everything that is on the screen
-  		erase();  
+  		erase();
 
   		srand (time(NULL)) ;
 
@@ -209,13 +209,13 @@ int main()
 
   		//colour on
   		attron(COLOR_PAIR(2));
-		
-		//displaying the obstacles with height 3 and width 5 characters		
+
+		//displaying the obstacles with height 3 and width 5 characters
   		for(int h = 0 ; h < 3 ; h++) {
 
   			for(int g = 0 ; g < 5 ; g++) {
   				mvprintw(obs.y+h,obs.x+g,"x");     	//obs
-  				mvprintw(obs1.y+h,obs1.x+g,"u");	//obs1	
+  				mvprintw(obs1.y+h,obs1.x+g,"u");	//obs1
 	  			mvprintw(obs2.y+h,obs2.x+g,"y");	//obs2
   				mvprintw(obs3.y+h,obs3.x+g,"g");	//obs3
   				mvprintw(obs4.y+h,obs4.x+g,"d");	//obs4
@@ -224,9 +224,9 @@ int main()
   		}
   		//colour off
   		attroff(COLOR_PAIR(2));
-  		
+
   		box();
-  		
+
   		//check if the player hit the obstacle
   		end = check(obs_corr_x, obs_corr_y, b.x, b.y);
 
@@ -254,7 +254,7 @@ int main()
   			return 0 ;
   		}
 
-  		
+
 
   		//colour on
   		attron(COLOR_PAIR(1));
@@ -266,7 +266,7 @@ int main()
   			mvprintw(trail_y[4], trail_x[4], "o");
   			mvprintw(trail_y[5], trail_x[5], "i");
   			mvprintw(trail_y[6], trail_x[6], "d");
-  		//colour off  			
+  		//colour off
   		attroff(COLOR_PAIR(1));
 
   		//colour on
@@ -285,7 +285,7 @@ int main()
 
   		//turns increased by 1
       	turn++;
-      
+
   	}
 
   	//close the window
@@ -305,7 +305,7 @@ int random_num(int low, int high, int corr, int turn){
 	//increasing the field of the player
 	turn += 2;
 
-	//while loop that checkes if the number generated 
+	//while loop that checkes if the number generated
 	//is beyond the protection area of the player
 	//Otherwise generates another number
 	while(random >= corr - turn && random <= corr + turn){
@@ -330,9 +330,9 @@ int check(int* x_corr, int* y_corr, int x, int y)
 			//for loop that creates a virtual height of the obstackle
 			for(int h = 0 ; h < 3 ; h++){
 
-				//if statement that checks if the player is inside 
+				//if statement that checks if the player is inside
 				if( ( x_corr[i] + u ) == x && ( y_corr[i] + h ) == y){
-					//returns -1 to flag that the player is hit 
+					//returns -1 to flag that the player is hit
 					//and GAME OVER
 					return -1;
 				}
@@ -385,7 +385,7 @@ void box()
 void rule()
 {
 	mvprintw(H/2+5, 2*H-14, "SNAKOIDS: SNAKE + ASTEROIDS");
-	
+
 	//colour on
 	attron(COLOR_PAIR(3));
 	//displaying the initial statistics of the game
